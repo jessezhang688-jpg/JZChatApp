@@ -1,7 +1,16 @@
 import Background from "@/assets/temp.png"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Input } from "@/components/ui/input"
+import {useState} from "react"
 
 const Auth = () => {
+
+    const[email, setEmail] = useState("")
+    const[password, setPassword] = useState("")
+    const[comfirmPassword, setComfirmPassword] = useState("")
+
+
+
     return (
     <div className="h-screen w-screen flex items-center justify-center">
         <div className = "h-[80vh] bg-white border-2 border-white text-opacity-90 shadow-2xl w-[80vw] md:w-[90vw] lg:w-[70vw]xl:w-[60vw] rounded-3xl grid xl:grid-cols-2">
@@ -15,14 +24,23 @@ const Auth = () => {
                     </p>
                 </div>
                 <div className = "flex items-center justify-center w-full">
-                    <Tabs>
+                    <Tabs className="flex flex-col gap-4">
                         <TabsList>
-                            <TabsTrigger value = "Login" className = " data-[state=active]: border-b-blue-500 p-3 transition-all duration-300">Login</TabsTrigger>
-                            <TabsTrigger value = "SignUp" className = " data-[state=active]: border-b-blue-500 p-3 transition-all duration-300">Sign Up</TabsTrigger>
+                            <TabsTrigger value = "Login" className = " data-[state=active]:bg-transparent text-black text-opacity-90 border-b-2 rounded-none w-full data-[state=active]:text-black data-[state=active]:font-semibold border-b-blue-500 p-3 transition-all duration-300">Login</TabsTrigger>
+                            <TabsTrigger value = "SignUp" className = " data-[state=active]:bg-transparent text-black text-opacity-90 border-b-2 rounded-none w-full data-[state=active]:text-black data-[state=active]:font-semibold border-b-blue-500 p-3 transition-all duration-300">Sign Up</TabsTrigger>
                         </TabsList>
-                        <TabsContent className = "" value = "Login"></TabsContent>
-                        <TabsContent className = "" value = "SignUp"></TabsContent>
+                        <TabsContent className = "flex flex-col gap-4" value = "Login">
+                            <Input placeholder = "Email" type = "email" className = "rounded-full p-6" value ={email} onChange={(e) => setEmail(e.target.value)}/>
+                            <Input placeholder = "Password" type = "password" className = "rounded-full p-6" value ={password} onChange={(e) => setPassword(e.target.value)}/>
+                        </TabsContent>
+                        <TabsContent className = "flex flex-col gap-4" value = "SignUp">
+                            <Input placeholder = "Email" type = "email" className = "rounded-full p-6" value ={email} onChange={(e) => setEmail(e.target.value)}/>
+                            <Input placeholder = "Password" type = "password" className = "rounded-full p-6" value ={password} onChange={(e) => setPassword(e.target.value)}/>
+                            <Input placeholder = "Retype Password" type = "password" className = "rounded-full p-6" value ={comfirmPassword} onChange={(e) => setComfirmPassword(e.target.value)}/>
+                        </TabsContent>
                     </Tabs>
+                </div>
+                <div className = "flex itmes-center justify-center w-full">
                 </div>
             </div>
         </div>
