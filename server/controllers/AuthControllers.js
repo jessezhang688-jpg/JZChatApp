@@ -1,16 +1,15 @@
 import User from "../models/UserModels.js";
 import jwt from "jsonwebtoken";
-const {sign} = jwt;
 
 const maxAge = 3*24*60*60*1000;
 
 const createToken = (email, userId) => {
-    return sign({email,userId},process.env.JWT_KEY,{expiresIn: maxAge});
+    return jwt.sign({email,userId},process.env.JWT_KEY,{expiresIn: maxAge});
 };
 
-export const signup = async (requrest, response, next) => {
+export const signup = async (request, response, next) => {
     try{
-        const {email, password} = req.body;
+        const {email, password} = request.body;
         if(!email || !password){
             return response.status(400).send("Email and Password pls");
         }

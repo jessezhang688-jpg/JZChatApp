@@ -3,6 +3,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import {useState} from "react"
 import { Button } from "@/components/ui/button"
+import { toast, Toaster } from "sonner"
+import {apiClient} from "@/lib/api-client.js"
+import { SIGNUP_ROUTE } from "@/utils/constants"
 
 const Auth = () => {
 
@@ -10,10 +13,29 @@ const Auth = () => {
     const[password, setPassword] = useState("")
     const[comfirmPassword, setComfirmPassword] = useState("")
 
+    const validateSignup = () => {
+        if(!email.length){
+            toast.error("Email is required");
+            return false;
+        }
+        if(!password.length){
+            toast.error("Password is required too btw");
+            return false;
+        }
+        if(password !== comfirmPassword){
+            toast.error("Bro, it's not that hard to retype ur password");
+            return false;
+        }
+        return true;
+    }
+
     const handleLogin = async () => {};
-    const handleSignup = async () => {};
-
-
+    const handleSignup = async () => {
+        if(validateSignup()){
+            const response = await apiClient.post(SIGNUP_ROUTE, {email, password});
+            console.log({response});
+        }
+    };
 
     return (
     <div className="h-screen w-screen flex items-center justify-center">

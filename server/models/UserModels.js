@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function (next) {
-    const salt = await genSalt();
+    const salt = await genSalt(10);
     this.password = await hash(this.password, salt);
     next();
 });
