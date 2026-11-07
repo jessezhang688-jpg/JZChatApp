@@ -19,13 +19,10 @@ export const signup = async (request, response, next) => {
             secure: true,
             sameSite: "None",
         });
-        return response.status(201).json({
+        return response.status(200).json({
             user:{
                 id: user.id,
                 email: user.email,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                image: user.image,
                 profileSetup: user.profileSetup,
             },
         })

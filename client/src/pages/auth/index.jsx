@@ -1,4 +1,3 @@
-import Background from "@/assets/temp.png"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import {useState} from "react"
