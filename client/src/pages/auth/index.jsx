@@ -5,12 +5,29 @@ import { Button } from "@/components/ui/button"
 import { toast, Toaster } from "sonner"
 import {apiClient} from "@/lib/api-client.js"
 import { SIGNUP_ROUTE } from "@/utils/constants"
+import { LOGIN_ROUTE } from "@/utils/constants"
+import { useNavigate } from "react-router-dom"
+import { useAppStore } from "@/store"
 
 const Auth = () => {
 
-    const[email, setEmail] = useState("")
-    const[password, setPassword] = useState("")
-    const[comfirmPassword, setComfirmPassword] = useState("")
+    const navigate = useNavigate();
+    const {setUserInfo} = useAppStore();
+    const[email, setEmail] = useState("");
+    const[password, setPassword] = useState("");
+    const[comfirmPassword, setComfirmPassword] = useState("");
+
+    const validateLogin = () => {
+        if(!email.length){
+            toast.error("Email is required");
+            return false;
+        }
+        if(!password.length){
+            toast.error("Password is required too btw");
+            return false;
+        }
+        return true;
+    }
 
     const validateSignup = () => {
         if(!email.length){
@@ -28,10 +45,28 @@ const Auth = () => {
         return true;
     }
 
-    const handleLogin = async () => {};
+    const handleLogin = async () => {
+        if(validateLogin()){
+            const response = await apiClient.post(
+                LOGIN_ROUTE,
+                {email, password},
+                {withCredentials: true},
+            )
+            if (response.data.user.id){
+                setUserInfo(response.data.user);
+                if (response.data.user.profileSetup) navigate("/chat");
+                else navigate("/profile");
+            }
+            console.log({response})
+        }
+    };
     const handleSignup = async () => {
         if(validateSignup()){
-            const response = await apiClient.post(SIGNUP_ROUTE, {email, password});
+            const response = await apiClient.post(SIGNUP_ROUTE, {email, password}, {withCredentials: true});
+            if (response.status === 201){
+                setUserInfo(response.data.user);
+                navigate("/profile")
+            }
             console.log({response});
         }
     };
