@@ -8,6 +8,7 @@ import { SIGNUP_ROUTE } from "@/utils/constants"
 import { LOGIN_ROUTE } from "@/utils/constants"
 import { useNavigate } from "react-router-dom"
 import { useAppStore } from "@/store"
+import loginImage from "../assets/temp.png";
 
 const Auth = () => {
 
@@ -104,7 +105,7 @@ const Auth = () => {
                 </div>
             </div>
             <div className = "hidden xl:flex items-center justify-center w-full">
-                <img src = "src/assets/temp.png" alt="login img" className="h-100 w-100"></img>
+                <img src = {loginImage} alt="login img" className="h-100 w-100"></img>
             </div>
         </div>
     </div>
