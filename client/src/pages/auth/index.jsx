@@ -8,7 +8,7 @@ import { SIGNUP_ROUTE } from "@/utils/constants"
 import { LOGIN_ROUTE } from "@/utils/constants"
 import { useNavigate } from "react-router-dom"
 import { useAppStore } from "@/store"
-import loginImage from "../assets/temp.png";
+import loginImage from "../../assets/temp.png";
 
 const Auth = () => {
 
