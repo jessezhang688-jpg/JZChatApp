@@ -32,6 +32,12 @@ const server = app.listen(port, ()=>{
 
 mongoose.connect(databaseURL).then(()=>console.log('DB connected!')).catch(err=>console.log(err.message));
 
+const path = require('path')
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
+
 /*const userLoginTry = await User.findById({
     email: 'jessezhang688@gmail.com'
 }).exec();
